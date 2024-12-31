@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+   <body>
+      <h2 style = "text-align: center;">Contact Form</h2>
+
+      <form action = "http://localhost:5000/error" method = post>
+         <fieldset>
+            {{ form.hidden_tag() }}
+            
+            <div>
+               {{ form.name.label }}: {{ form.name }}<br>
+               
+               {{ form.gender.label }}: {{ form.gender }}<br>
+
+               {{ form.address.label }}:<br>{{ form.address }}<br>
+               
+               {{ form.email.label }}: {{ form.email }}<br>
+               
+               {{ form.age.label }}: {{ form.age }}<br>
+               
+               {{ form.language.label }}: {{ form.language }}<br>
+
+               {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                     <ul>
+                        {% for message in messages %}
+                           <li>{{ message }}</li>
+                        {% endfor %}
+                        
+                        {% for message in form.email.errors %}
+                           <li>{{ message }}</li>
+                        {% endfor %}
+
+                        {% for message in form.age.errors %}
+                           <li>{{ message }}</li>
+                        {% endfor %}
+                     </ul>
+                  {% endif %}
+               {% endwith %}
+
+               {{ form.submit }}
+            </div>
+            
+         </fieldset>
+      </form>
+   </body>
+</html>
